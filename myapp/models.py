@@ -20,11 +20,17 @@ class Blog(models.Model):
     content = models.CharField(max_length=2500)
     posted_date = models.DateTimeField(default=timezone.now)
     last_updated = models.DateTimeField(auto_now=True)
-    published_date = models.DateTimeField(default=False)
+    published_date = models.DateTimeField(null=True)
     
     class Meta:
         ordering = ['posted_date']
     
     def __str__(self):
         return self.title
+
+class Subscriber(models.Model):
+    email = models.EmailField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     
+    def __str__(self):
+        return self.email
